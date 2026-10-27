@@ -1,0 +1,34 @@
+graph TD
+    TA[SURFconext TA] 
+    eduGAIN[Trust‑Mark Issuer – eduGAIN Membership] 
+    REFEDS[Trust‑Mark Issuer – REFEDS R&S] 
+    SRAM[Trust‑Mark Issuer – SRAM]
+
+    OP_SURF[OP – SURF] 
+    OP_NIKHEF[OP – Nikhef] 
+    OP_A[OP – Univ A] 
+    OP_B[OP – Univ B] 
+    OP_EDUID[OP – eduID]
+
+    Publisher[RP – Publisher] 
+    ExamSystem[RP – Exam System]
+    RP_SURF1[RP – SURF‑Dept‑1] 
+    RP_SURF2[RP – SURF‑Dept‑2] 
+    RP_NIK1[RP – Nikhef‑Lab‑1] 
+    RP_NIK2[RP – Nikhef‑Lab‑2]
+
+    TA -- federation --> eduGAIN
+    TA -- federation --> REFEDS
+    TA -- federation --> SRAM
+
+    TA -- fetch/resolve --> OP_SURF
+    TA -- fetch/resolve --> OP_NIKHEF
+    TA -- fetch/resolve --> OP_A
+    TA -- fetch/resolve --> OP_B
+    TA -- fetch/resolve --> OP_EDUID
+    TA -- fetch/resolve --> Publisher
+    TA -- fetch/resolve --> ExamSystem
+    TA -- fetch/resolve --> RP_SURF1
+    TA -- fetch/resolve --> RP_SURF2
+    TA -- fetch/resolve --> RP_NIK1
+    TA -- fetch/resolve --> RP_NIK2
