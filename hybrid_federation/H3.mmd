@@ -9,15 +9,15 @@ graph TD
     OP_SURF[OP – SURF] 
     OP_NIKHEF[OP – Nikhef] 
     OP_A[OP – Univ A] 
-    OP_B[OP – Univ B]          %% member of IA_B
-    OP_EDUID[OP – eduID]       %% member of IA_EDUID
+    OP_B[OP – Univ B]  
+    OP_EDUID[OP – eduID] 
 
     %% ── Issuer Entities ────────────────────────────────────────────────────────
     Issuer_SURF[Issuer – SURF] 
     Issuer_NIKHEF[Issuer – Nikhef] 
     Issuer_A[Issuer – Univ A] 
-    Issuer_B[Issuer – Univ B]      %% member of IA_B
-    Issuer_EDUID[Issuer – eduID]   %% member of IA_EDUID
+    Issuer_B[Issuer – Univ B] 
+    Issuer_EDUID[Issuer – eduID]  
 
     %% ── Relying Parties (RP) – direct member of TA ───────────────────────────────
     Publisher[RP – Publisher] 
@@ -28,14 +28,14 @@ graph TD
     RP_NIK2[RP – Nikhef‑Lab‑2] 
 
     %% ── Verifiers ───────────────────────────────────────────────────────────────
-    Verifier_SURF1[Verifier – SURF‑Dept‑1]      %% subordinate to SURF Intermediate
-    Verifier_Exam[Verifier – Exam System]      %% direct member of TA
+    Verifier_SURF1[Verifier – SURF‑Dept‑1] 
+    Verifier_Exam[Verifier – Exam System]  
 
     %% ── Intermediate entities (as defined in the spec) ───────────────────────────
     Intermediate_SURF[Intermediate – SURF] 
     Intermediate_NIKHEF[Intermediate – Nikhef] 
-    IA_B[Intermediate – Univ B]          %% for organisation that is both OP & Issuer
-    IA_EDUID[Intermediate – eduID]       %% for organisation that is both OP & Issuer
+    IA_B[Intermediate – Univ B]      
+    IA_EDUID[Intermediate – eduID]  
 
     %% ── Federation relationships (Trust Anchor ↔ Trust‑Mark Issuers) ─────────────
     TA -- federation --> eduGAIN
@@ -49,8 +49,8 @@ graph TD
     TA -- fetch/resolve --> Issuer_SURF
     TA -- fetch/resolve --> Issuer_NIKHEF
     TA -- fetch/resolve --> Issuer_A
-    TA -- fetch/resolve --> Publisher          %% direct RP
-    TA -- fetch/resolve --> Verifier_Exam      %% direct Verifier
+    TA -- fetch/resolve --> Publisher   
+    TA -- fetch/resolve --> Verifier_Exam   
     TA -- fetch/resolve --> Intermediate_SURF
     TA -- fetch/resolve --> Intermediate_NIKHEF
     TA -- fetch/resolve --> IA_B
