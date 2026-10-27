@@ -1,0 +1,66 @@
+graph TD
+    %% ---------- Trust Anchor ----------
+    TA[eduGAIN TA]
+
+    %% ---------- Direct children of the TA ----------
+    IA_NL[IA – NL] 
+    IA_UK[IA – UK] 
+    IA_DE[IA – DE] 
+    TMO["Trust‑Mark Owner (registered at TA)"]
+
+    %% ---------- Trust‑Mark Issuers (one per IA) ----------
+    TMI_NL["Trust‑Mark Issuer – NL"] 
+    TMI_UK["Trust‑Mark Issuer – UK"] 
+    TMI_DE["Trust‑Mark Issuer – DE"]
+
+    %% ---------- OP leafs ----------
+    NL_OP1[OP – NL Univ 1] 
+    NL_OP2[OP – NL Univ 2] 
+    UK_OP1[OP – UK Univ 1] 
+    UK_OP2[OP – UK Univ 2] 
+    DE_OP1[OP – DE Univ 1] 
+    DE_OP2[OP – DE Univ 2]
+
+    %% ---------- RP leafs ----------
+    NL_RP1[RP – NL Service 1] 
+    NL_RP2[RP – NL Service 2] 
+    UK_RP1[RP – UK Service 1] 
+    UK_RP2[RP – UK Service 2] 
+    DE_RP1[RP – DE Service 1] 
+    DE_RP2[RP – DE Service 2]
+
+    %% ---------- Relationships ----------
+    TA --> IA_NL
+    TA --> IA_UK
+    TA --> IA_DE
+    TA --> TMO
+
+    IA_NL --> TMI_NL
+    IA_UK --> TMI_UK
+    IA_DE --> TMI_DE
+
+    %% OP and RP leafs are subordinate to their respective IAs
+    IA_NL --> NL_OP1
+    IA_NL --> NL_OP2
+    IA_NL --> NL_RP1
+    IA_NL --> NL_RP2
+
+    IA_UK --> UK_OP1
+    IA_UK --> UK_OP2
+    IA_UK --> UK_RP1
+    IA_UK --> UK_RP2
+
+    IA_DE --> DE_OP1
+    IA_DE --> DE_OP2
+    IA_DE --> DE_RP1
+    IA_DE --> DE_RP2
+
+    %% ---------- Uniform (light‑grey) styling for all nodes ----------
+    class TA,IA_NL,IA_UK,IA_DE,TMO,TMI_NL,TMI_UK,TMI_DE,NL_OP1,NL_OP2,UK_OP1,UK_OP2,DE_OP1,DE_OP2,NL_RP1,NL_RP2,UK_RP1,UK_RP2,DE_RP1,DE_RP2 defaultNode;
+
+    %% ---------- Highlight the entities that have the eduGAIN Trust Mark ----------
+    class NL_OP1,UK_RP1,DE_OP2,NL_RP1,DE_RP2,TMI_NL,TMI_UK,TMI_DE,TMO hasTM;
+
+    %% ---------- Styling definitions ----------
+    classDef defaultNode fill:#f2f2f2,stroke:#666666,stroke-width:1px,color:#000000;
+    classDef hasTM fill:#b6e3b6,stroke:#2c662d,stroke-width:2px;
