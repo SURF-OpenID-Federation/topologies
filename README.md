@@ -7,8 +7,8 @@ To perform the evaluation, open source (GTP-oss-120b) and commercial IA models (
 The federation models were all described using the mermaid language, whereas the evaluation matrix is described in markdown.
 
 Purpose of this approach was to:
-1) Test the ability to easily model and evaluate and compare federation topologies for similar scenarios.
-2) Work with the AI LLMs to readily generate evaluations on  either general or rather very specific aspects of the topology with respect to certain aspects of the OpenID federation specification. 
+1) Test the ability to easily model, evaluate and compare federation topologies for similar scenarios.
+2) Work with the AI LLMs to readily generate evaluations on either general or rather very specific aspects of the topology with respect to certain aspects of the OpenID federation specification, taking into account operational considerations like scalability, key rolover, etc. 
 3) Modify and change aspects of the topology and readily re-evaluate topology models against existing matrix and existing topology models.
 
 The currently included scenarios explores various federation models we (may) have in Research and Education, including:
