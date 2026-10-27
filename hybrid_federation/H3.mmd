@@ -1,0 +1,71 @@
+graph TD
+    %% ── Trust Anchor & Trust‑Mark Issuers ───────────────────────────────────────
+    TA[SURFconext TA] 
+    eduGAIN[Trust‑Mark Issuer – eduGAIN Membership] 
+    REFEDS[Trust‑Mark Issuer – REFEDS R&S] 
+    SRAM[Trust‑Mark Issuer – SRAM]
+
+    %% ── OpenID Providers (OP) ─────────────────────────────────────────────────────
+    OP_SURF[OP – SURF] 
+    OP_NIKHEF[OP – Nikhef] 
+    OP_A[OP – Univ A] 
+    OP_B[OP – Univ B]          %% member of IA_B
+    OP_EDUID[OP – eduID]       %% member of IA_EDUID
+
+    %% ── Issuer Entities ────────────────────────────────────────────────────────
+    Issuer_SURF[Issuer – SURF] 
+    Issuer_NIKHEF[Issuer – Nikhef] 
+    Issuer_A[Issuer – Univ A] 
+    Issuer_B[Issuer – Univ B]      %% member of IA_B
+    Issuer_EDUID[Issuer – eduID]   %% member of IA_EDUID
+
+    %% ── Relying Parties (RP) – direct member of TA ───────────────────────────────
+    Publisher[RP – Publisher] 
+
+    %% ── RPs that are subordinate to Intermediates ─────────────────────────────────
+    RP_SURF2[RP – SURF‑Dept‑2] 
+    RP_NIK1[RP – Nikhef‑Lab‑1] 
+    RP_NIK2[RP – Nikhef‑Lab‑2] 
+
+    %% ── Verifiers ───────────────────────────────────────────────────────────────
+    Verifier_SURF1[Verifier – SURF‑Dept‑1]      %% subordinate to SURF Intermediate
+    Verifier_Exam[Verifier – Exam System]      %% direct member of TA
+
+    %% ── Intermediate entities (as defined in the spec) ───────────────────────────
+    Intermediate_SURF[Intermediate – SURF] 
+    Intermediate_NIKHEF[Intermediate – Nikhef] 
+    IA_B[Intermediate – Univ B]          %% for organisation that is both OP & Issuer
+    IA_EDUID[Intermediate – eduID]       %% for organisation that is both OP & Issuer
+
+    %% ── Federation relationships (Trust Anchor ↔ Trust‑Mark Issuers) ─────────────
+    TA -- federation --> eduGAIN
+    TA -- federation --> REFEDS
+    TA -- federation --> SRAM
+
+    %% ── TA resolves metadata for top‑level entities only ────────────────────────
+    TA -- fetch/resolve --> OP_SURF
+    TA -- fetch/resolve --> OP_NIKHEF
+    TA -- fetch/resolve --> OP_A
+    TA -- fetch/resolve --> Issuer_SURF
+    TA -- fetch/resolve --> Issuer_NIKHEF
+    TA -- fetch/resolve --> Issuer_A
+    TA -- fetch/resolve --> Publisher          %% direct RP
+    TA -- fetch/resolve --> Verifier_Exam      %% direct Verifier
+    TA -- fetch/resolve --> Intermediate_SURF
+    TA -- fetch/resolve --> Intermediate_NIKHEF
+    TA -- fetch/resolve --> IA_B
+    TA -- fetch/resolve --> IA_EDUID
+
+    %% ── Grouping: Intermediates aggregate their subordinate RPs / Verifiers ───────
+    Intermediate_SURF --> RP_SURF2
+    Intermediate_SURF --> Verifier_SURF1
+
+    Intermediate_NIKHEF --> RP_NIK1
+    Intermediate_NIKHEF --> RP_NIK2
+
+    %% ── New IA ↔ OP / Issuer links (organizations that are both OP and Issuer) ───
+    IA_B --> OP_B
+    IA_B --> Issuer_B
+
+    IA_EDUID --> OP_EDUID
+    IA_EDUID --> Issuer_EDUID

@@ -1,0 +1,66 @@
+graph TD
+    %% ── Trust Anchor & Trust‑Mark Issuers ───────────────────────────────────────
+    TA[SURFconext TA] 
+    eduGAIN[Trust‑Mark Issuer – eduGAIN Membership] 
+    REFEDS[Trust‑Mark Issuer – REFEDS R&S] 
+    SRAM[Trust‑Mark Issuer – SRAM]
+
+    %% ── Intermediate Authorities ───────────────────────────────────────────────
+    IA_OIDC[Intermediate – OIDC Federation]      %% contains all OPs & RPs
+    IA_Wallet[Intermediate – Wallet Federation]  %% contains all Issuers & Verifiers
+
+    %% ── OpenID Providers (OP) – members of IA_OIDC ─────────────────────────────
+    OP_SURF[OP – SURF] 
+    OP_NIKHEF[OP – Nikhef] 
+    OP_A[OP – Univ A] 
+    OP_B[OP – Univ B] 
+    OP_EDUID[OP – eduID]
+
+    %% ── Relying Parties (RP) – members of IA_OIDC ─────────────────────────────
+    Publisher[RP – Publisher] 
+    RP_SURF2[RP – SURF‑Dept‑2] 
+    RP_NIK1[RP – Nikhef‑Lab‑1] 
+    RP_NIK2[RP – Nikhef‑Lab‑2] 
+
+    %% ── Issuer Entities – members of IA_Wallet ─────────────────────────────────
+    Issuer_SURF[Issuer – SURF] 
+    Issuer_NIKHEF[Issuer – Nikhef] 
+    Issuer_A[Issuer – Univ A] 
+    Issuer_B[Issuer – Univ B] 
+    Issuer_EDUID[Issuer – eduID]
+
+    %% ── Verifiers – members of IA_Wallet ───────────────────────────────────────
+    Verifier_SURF1[Verifier – SURF‑Dept‑1] 
+    Verifier_Exam[Verifier – Exam System] 
+
+    %% ── Federation relationships (Trust Anchor ↔ Trust‑Mark Issuers) ─────────────
+    TA -- federation --> eduGAIN
+    TA -- federation --> REFEDS
+    TA -- federation --> SRAM
+
+    %% ── TA resolves metadata for the two Intermediate Authorities only ────────
+    TA -- fetch/resolve --> IA_OIDC
+    TA -- fetch/resolve --> IA_Wallet
+
+    %% ── IA_OIDC resolves its members (OPs & RPs) ────────────────────────────────
+    IA_OIDC -- fetch/resolve --> OP_SURF
+    IA_OIDC -- fetch/resolve --> OP_NIKHEF
+    IA_OIDC -- fetch/resolve --> OP_A
+    IA_OIDC -- fetch/resolve --> OP_B
+    IA_OIDC -- fetch/resolve --> OP_EDUID
+
+    IA_OIDC -- fetch/resolve --> Publisher
+    IA_OIDC -- fetch/resolve --> RP_SURF2
+    IA_OIDC -- fetch/resolve --> RP_NIK1
+    IA_OIDC -- fetch/resolve --> RP_NIK2
+
+    %% ── IA_Wallet resolves its members (Issuers & Verifiers) ───────────────────
+    IA_Wallet -- fetch/resolve --> Issuer_SURF
+    IA_Wallet -- fetch/resolve --> Issuer_NIKHEF
+    IA_Wallet -- fetch/resolve --> Issuer_A
+    IA_Wallet -- fetch/resolve --> Issuer_B
+    IA_Wallet -- fetch/resolve --> Issuer_EDUID
+
+    IA_Wallet -- fetch/resolve --> Verifier_SURF1
+    IA_Wallet -- fetch/resolve --> Verifier_Exam
+

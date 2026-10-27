@@ -1,0 +1,43 @@
+graph TD
+    %% Trust Anchor & Trust‑Mark Issuers
+    TA[SURFconext TA] 
+    eduGAIN[Trust‑Mark Issuer – eduGAIN Membership] 
+    REFEDS[Trust‑Mark Issuer – REFEDS R&S] 
+    SRAM[Trust‑Mark Issuer – SRAM]
+
+    %% OpenID Providers (OP) – some also act as Issuers
+    OP_SURF[OP – SURF] 
+    OP_NIKHEF[OP – Nikhef] 
+    OP_A[OP – Univ A] 
+    OP_B[OP/Issuer – Univ B]          %% combined OP + Issuer
+    OP_EDUID[OP/Issuer – eduID]       %% combined OP + Issuer
+
+    %% Relying Parties (RP) – regular RPs
+    Publisher[RP – Publisher] 
+    RP_SURF2[RP – SURF‑Dept‑2] 
+    RP_NIK1[RP – Nikhef‑Lab‑1] 
+    RP_NIK2[RP – Nikhef‑Lab‑2] 
+
+    %% Verifiers (derived from RPs)
+    Verifier_SURF1[Verifier – SURF‑Dept‑1] 
+    Verifier_Exam[Verifier – Exam System] 
+
+    %% Federation relationships (Trust Anchor ↔ Trust‑Mark Issuers)
+    TA -- federation --> eduGAIN
+    TA -- federation --> REFEDS
+    TA -- federation --> SRAM
+
+    %% TA fetch/resolve metadata for all entities
+    TA -- fetch/resolve --> OP_SURF
+    TA -- fetch/resolve --> OP_NIKHEF
+    TA -- fetch/resolve --> OP_A
+    TA -- fetch/resolve --> OP_B
+    TA -- fetch/resolve --> OP_EDUID
+
+    TA -- fetch/resolve --> Publisher
+    TA -- fetch/resolve --> RP_SURF2
+    TA -- fetch/resolve --> RP_NIK1
+    TA -- fetch/resolve --> RP_NIK2
+
+    TA -- fetch/resolve --> Verifier_SURF1
+    TA -- fetch/resolve --> Verifier_Exam
