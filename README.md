@@ -2,7 +2,7 @@
 
 This repo contains the results of an attempt to, in a reproducible way, design and evaluate federation topologies based on the use of OpenID Federation.
 
-To perform the evaluation, open source (GTP-oss-120b) and commercial IA models (CHATGTP) were used which were provided with the OpenID Federation 1.0 and OpenID Federation for Wallet Architectures 1.0  specifications as conext..
+To perform the evaluation, open source (GTP-oss-120b) and commercial IA models (CHATGTP) were used which were provided with the OpenID Federation 1.0 and OpenID Federation for Wallet Architectures 1.0  specifications as context.
 
 The federation models were all described using the mermaid language, whereas the evaluation matrix is described in markdown.
 
