@@ -1,0 +1,73 @@
+graph TD
+    %% ── Top‑level eduGAIN TA ───────────────────────────────────────────────
+    eduGAIN_TA[eduGAIN TA]
+
+    %% ── Trust‑Mark Owners (TMOs) under eduGAIN TA ─────────────────────────
+    TMO_EduGAIN[Trust‑Mark Owner – eduGAIN Membership]
+    TMO_REFEDS[Trust‑Mark Owner – REFEDS]
+
+    eduGAIN_TA -- registers --> TMO_EduGAIN
+    eduGAIN_TA -- registers --> TMO_REFEDS
+
+    %% ── SURFconext TA (subordinate) ───────────────────────────────────────
+    TA[SURFconext TA]
+
+    eduGAIN_TA -- subordinate --> TA
+
+    %% ── Trust‑Mark Issuers (all under SURF TA) ───────────────────────────
+    eduGAIN_TM[Trust‑Mark Issuer – eduGAIN Membership]
+    REFEDS[Trust‑Mark Issuer – REFEDS R&S]
+    SRAM[Trust‑Mark Issuer – SRAM]
+    LSA[Trust‑Mark Issuer – Learning Standards Authority]
+
+    TA -- federation --> eduGAIN_TM
+    TA -- federation --> REFEDS
+    TA -- federation --> SRAM
+    TA -- federation --> LSA
+
+    %% ── Intermediate – OIDC Federation ─────────────────────────────────────
+    IA_OIDC[Intermediate – OIDC Federation]
+
+    TA -- fetch/resolve --> IA_OIDC
+
+    %% ── Scenario A Intermediates under IA_OIDC ─────────────────────────────
+    IA_SURF[Intermediate – SURF IA]
+    IA_NIKHEF[Intermediate – Nikhef IA]
+
+    IA_OIDC -- subordinate --> IA_SURF
+    IA_OIDC -- subordinate --> IA_NIKHEF
+
+    %% ── OPs under their IAs (as in multi‑B) ───────────────────────────────
+    OP_SURF[OP – SURF]
+    OP_NIKHEF[OP – Nikhef]
+
+    IA_SURF -- subordinate --> OP_SURF
+    IA_NIKHEF -- subordinate --> OP_NIKHEF
+
+    %% ── Remaining OPs (unchanged) ────────────────────────────────────────
+    OP_A[OP – Univ A]
+    OP_B[OP – Univ B]
+    OP_EDUID[OP – eduID]
+
+    IA_OIDC -- fetch/resolve --> OP_A
+    IA_OIDC -- fetch/resolve --> OP_B
+    IA_OIDC -- fetch/resolve --> OP_EDUID
+
+    %% ── Relying Party directly under OIDC IA (Publisher only) ─────────────
+    Publisher[RP – Publisher]
+
+    IA_OIDC -- fetch/resolve --> Publisher
+
+    %% ── RP leafs under IA_SURF ───────────────────────────────────────────
+    RP_SURF1[RP – SURF‑Dept‑1]
+    RP_SURF2[RP – SURF‑Dept‑2]
+
+    IA_SURF -- subordinate --> RP_SURF1
+    IA_SURF -- subordinate --> RP_SURF2
+
+    %% ── RP leafs under IA_NIKHEF ──────────────────────────────────────────
+    RP_NIK1[RP – Nikhef‑Lab‑1]
+    RP_NIK2[RP – Nikhef‑Lab‑2]
+
+    IA_NIKHEF -- subordinate --> RP_NIK1
+    IA_NIKHEF -- subordinate --> RP_NIK2

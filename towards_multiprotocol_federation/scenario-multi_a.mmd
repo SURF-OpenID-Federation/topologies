@@ -1,0 +1,101 @@
+graph TD
+    %% ── Top‑level Trust Anchor ───────────────────────────────────────────────
+    eduGAIN_TA[eduGAIN TA]
+
+    %% ── Trust‑Mark Owners (TMOs) under eduGAIN TA ─────────────────────────────
+    TMO_EduGAIN[Trust‑Mark Owner – eduGAIN Membership]
+    TMO_REFEDS[Trust‑Mark Owner – REFEDS]
+
+    eduGAIN_TA -- owns --> TMO_EduGAIN
+    eduGAIN_TA -- owns --> TMO_REFEDS
+
+    %% ── SURFconext Trust Anchor (subordinate to eduGAIN TA) ──────────────────
+    TA[SURFconext TA]
+
+    eduGAIN_TA -- subordinate --> TA
+
+    %% ── Trust‑Mark Issuers (including the new one) ───────────────────────────
+    eduGAIN_TM[Trust‑Mark Issuer – eduGAIN Membership]
+    REFEDS[Trust‑Mark Issuer – REFEDS R&S]
+    SRAM[Trust‑Mark Issuer – SRAM]
+    LSA[Trust‑Mark Issuer – Learning Standards Authority]
+
+    TA -- federation --> eduGAIN_TM
+    TA -- federation --> REFEDS
+    TA -- federation --> SRAM
+    TA -- federation --> LSA
+
+    %% ── Intermediate – OIDC Federation (Multi‑protocol) ───────────────────────
+    IA_OIDC[Intermediate – OIDC Federation]
+
+    TA -- fetch/resolve --> IA_OIDC
+
+    %% ── Intermediate – Wallet Federation (Multi‑protocol) ────────────────────
+    IA_Wallet[Intermediate – Wallet Federation]
+
+    TA -- fetch/resolve --> IA_Wallet
+
+    %% ── OpenID Providers (OP) – members of IA_OIDC ───────────────────────────
+    OP_SURF[OP – SURF]
+    OP_NIKHEF[OP – Nikhef]
+    OP_A[OP – Univ A]
+    OP_B[OP – Univ B]
+    OP_EDUID[OP – eduID]
+
+    IA_OIDC -- fetch/resolve --> OP_SURF
+    IA_OIDC -- fetch/resolve --> OP_NIKHEF
+    IA_OIDC -- fetch/resolve --> OP_A
+    IA_OIDC -- fetch/resolve --> OP_B
+    IA_OIDC -- fetch/resolve --> OP_EDUID
+
+    %% ── Relying Parties (RP) – members of IA_OIDC ───────────────────────────
+    Publisher[RP – Publisher]
+    RP_SURF2[RP – SURF‑Dept‑2]
+    RP_NIK1[RP – Nikhef‑Lab‑1]
+    RP_NIK2[RP – Nikhef‑Lab‑2]
+
+    IA_OIDC -- fetch/resolve --> Publisher
+    IA_OIDC -- fetch/resolve --> RP_SURF2
+    IA_OIDC -- fetch/resolve --> RP_NIK1
+    IA_OIDC -- fetch/resolve --> RP_NIK2
+
+    %% ── Issuer Entities – members of IA_Wallet ─────────────────────────────────
+    Issuer_SURF[Issuer – SURF]
+    Issuer_NIKHEF[Issuer – Nikhef]
+    Issuer_A[Issuer – Univ A]
+    Issuer_B[Issuer – Univ B]
+    Issuer_EDUID[Issuer – eduID]
+
+    IA_Wallet -- fetch/resolve --> Issuer_SURF
+    IA_Wallet -- fetch/resolve --> Issuer_NIKHEF
+    IA_Wallet -- fetch/resolve --> Issuer_A
+    IA_Wallet -- fetch/resolve --> Issuer_B
+    IA_Wallet -- fetch/resolve --> Issuer_EDUID
+
+    %% ── Verifiers – members of IA_Wallet ───────────────────────────────────────
+    Verifier_SURF1[Verifier – SURF‑Dept‑1]
+    Verifier_Exam[Verifier – Exam System]
+
+    IA_Wallet -- fetch/resolve --> Verifier_SURF1
+    IA_Wallet -- fetch/resolve --> Verifier_Exam
+
+    %% ── Scenario A Intermediates added under IA_OIDC ───────────────────────────
+    IA_SURF[Intermediate – SURF IA]
+    IA_NIKHEF[Intermediate – Nikhef IA]
+
+    IA_OIDC -- subordinate --> IA_SURF
+    IA_OIDC -- subordinate --> IA_NIKHEF
+
+    %% ── RP leafs under IA_SURF (Scenario A) ───────────────────────────────────
+    RP_SURF1_A[RP – SURF‑Dept‑1 - Scenario A]
+    RP_SURF2_A[RP – SURF‑Dept‑2 - Scenario A]
+
+    IA_SURF -- subordinate --> RP_SURF1_A
+    IA_SURF -- subordinate --> RP_SURF2_A
+
+    %% ── RP leafs under IA_NIKHEF (Scenario A) ─────────────────────────────────
+    RP_NIK1_A[RP – Nikhef‑Lab‑1 - Scenario A]
+    RP_NIK2_A[RP – Nikhef‑Lab‑2 - Scenario A]
+
+    IA_NIKHEF -- subordinate --> RP_NIK1_A
+    IA_NIKHEF -- subordinate --> RP_NIK2_A

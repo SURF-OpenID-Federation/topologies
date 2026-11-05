@@ -1,0 +1,55 @@
+graph TD
+    %% ── SURFconext Trust Anchor ───────────────────────────────────────
+    TA[SURFconext TA]
+
+    %% ── Trust‑Mark Issuer (only SRAM) ─────────────────────────────────
+    SRAM[Trust‑Mark Issuer – SRAM]
+
+    TA -- federation --> SRAM
+
+    %% ── Intermediate – OIDC Federation ─────────────────────────────────
+    IA_OIDC[Intermediate – OIDC Federation]
+
+    TA -- fetch/resolve --> IA_OIDC
+
+    %% ── Scenario A Intermediates under IA_OIDC ───────────────────────────
+    IA_SURF[Intermediate – SURF IA]
+    IA_NIKHEF[Intermediate – Nikhef IA]
+
+    IA_OIDC -- subordinate --> IA_SURF
+    IA_OIDC -- subordinate --> IA_NIKHEF
+
+    %% ── OPs moved under their respective IAs (as in multi‑B) ───────────
+    OP_SURF[OP – SURF]
+    OP_NIKHEF[OP – Nikhef]
+
+    IA_SURF -- subordinate --> OP_SURF
+    IA_NIKHEF -- subordinate --> OP_NIKHEF
+
+    %% ── Remaining OPs (unchanged) ───────────────────────────────────────
+    OP_A[OP – Univ A]
+    OP_B[OP – Univ B]
+    OP_EDUID[OP – eduID]
+
+    IA_OIDC -- fetch/resolve --> OP_A
+    IA_OIDC -- fetch/resolve --> OP_B
+    IA_OIDC -- fetch/resolve --> OP_EDUID
+
+    %% ── Relying Parties directly under OIDC IA (only Publisher kept) ─────
+    Publisher[RP – Publisher]
+
+    IA_OIDC -- fetch/resolve --> Publisher
+
+    %% ── RP leafs under IA_SURF ───────────────────────────────────────────
+    RP_SURF1[RP – SURF‑Dept‑1]
+    RP_SURF2[RP – SURF‑Dept‑2]
+
+    IA_SURF -- subordinate --> RP_SURF1
+    IA_SURF -- subordinate --> RP_SURF2
+
+    %% ── RP leafs under IA_NIKHEF ──────────────────────────────────────────
+    RP_NIK1[RP – Nikhef‑Lab‑1]
+    RP_NIK2[RP – Nikhef‑Lab‑2]
+
+    IA_NIKHEF -- subordinate --> RP_NIK1
+    IA_NIKHEF -- subordinate --> RP_NIK2
