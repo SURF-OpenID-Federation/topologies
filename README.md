@@ -15,6 +15,7 @@ The currently included scenarios explores various federation models we (may) hav
 * National OIDC based OpenID Federation – 3 scenarios
 * eduGAIN OIDC based inter-federation – 2 scenarios
 * Hybrid federation (OIDC & Wallets) – 4 scenarios
+* A scenario to grow from single protocol federation to multi protocol 
 
 The models, evaluation matrix and the evaluation results are all include and may be used for further analysis or re-evaluation.
 
