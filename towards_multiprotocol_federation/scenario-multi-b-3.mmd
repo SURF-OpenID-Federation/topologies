@@ -10,7 +10,7 @@ graph TD
     eduGAIN_TA -- registers --> TMO_REFEDS
 
     %% ── SURFconext TA (subordinate) ───────────────────────────────────────
-    TA[SURF TA]
+     TA[SURFconext TA]
 
     eduGAIN_TA -- subordinate --> TA
 
@@ -26,7 +26,7 @@ graph TD
     TA -- federation --> LSA
 
     %% ── Intermediate – OIDC Federation ─────────────────────────────────────
-    IA_OIDC [Intermediate – SURFAccess OIDC Federation]
+    IA_OIDC[Intermediate – OIDC Federation]
 
     TA -- fetch/resolve --> IA_OIDC
 
